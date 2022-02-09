@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl=2
+
 /**
 ===============================
 Pipeline
@@ -45,20 +47,12 @@ def summary = [:]
 
 run_name = ( params.run_name == false) ? "${workflow.sessionId}" : "${params.run_name}"
 
-process get_software_versions {
+include { MAIN } from './workflows/main' params(params)
 
-    publishDir "${OUTDIR}/Summary/versions", mode: 'copy'
+workflow {
 
-    output:
-    file("v*.txt")
-    file(yaml_file) into (software_versions_yaml_fastqc, software_versions_yaml_lib, software_versions_yaml_sample)
+	MAIN()
 
-    script:
-    yaml_file = "software_versions_mqc.yaml"
-
-    """
-    parse_versions.pl >  $yaml_file
-    """
 }
 
 workflow.onComplete {
