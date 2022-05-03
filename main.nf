@@ -18,34 +18,12 @@ git@github.com:ikmb/pipeline.git
 
 params.version = workflow.manifest.version
 
-// Help message
-helpMessage = """
-===============================================================================
-IKMB XXX pipeline | version ${params.version}
-===============================================================================
-Usage: nextflow run ikmb/XXX 
-
-Required parameters:
---email 		       Email address to send reports to (enclosed in '')
-Optional parameters:
-
-Expert options (usually not necessary to change!):
-
-Output:
---outdir                       Local directory to which all output is written (default: results)
-"""
-
-params.help = false
-
-// Show help when needed
-if (params.help){
-    log.info helpMessage
-    exit 0
-}
-
 def summary = [:]
 
 run_name = ( params.run_name == false) ? "${workflow.sessionId}" : "${params.run_name}"
+
+WorkflowMain.initialise(workflow, params, log)
+WorkflowPipeline.initialise( params, log)
 
 include { MAIN } from './workflows/main' params(params)
 
