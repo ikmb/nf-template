@@ -27,10 +27,13 @@ WorkflowPipeline.initialise( params, log)
 
 include { MAIN } from './workflows/main' params(params)
 
+multiqc_report = Channel.from([])
+
 workflow {
 
 	MAIN()
 
+	 multiqc_report = multiqc_report.mix(MAIN.out.qc)
 }
 
 workflow.onComplete {

@@ -1,6 +1,7 @@
 include { INPUT_CHECK } from '../modules/input_check'
 include { FASTP } from '../modules/fastp'
 include { SOFTWARE_VERSIONS } from '../modules/software_versions'
+include { MULTIQC } from './../modules/multiqc'
 
 workflow MAIN {
 

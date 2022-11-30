@@ -1,5 +1,7 @@
 process FASTP {
 
+   container 'quay.io/biocontainers/fastp:0.23.2--h5f740d0_3'
+
    input:
    tuple val(meta),path(r1),path(r2)
 
