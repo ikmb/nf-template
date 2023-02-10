@@ -6,10 +6,10 @@ This document is a brief overview of how to use this code base. Some understandi
 
 This pipeline base is organized in the following way:
 
-main.nf - entry point into the pipeline, imports the core workflow from workflow/<pipeline>.nf
-workflow/<pipeline.nf> - the actual core logic of the pipeline; imports sub-workflows from subworkflow/<sub>.nf
-subworkflow/<sub>.nf - a self-contained processing chain that is part of the larger workflow (e.g. read alignment and dedup in a WGS calling workflow)
-modules/<module>.nf - A command line tool/call that can be imported into a (sub)workflow. 
+* `main.nf` - entry point into the pipeline, imports the core workflow from workflow/<pipeline>.nf
+* `workflow/<pipeline.nf>` - the actual core logic of the pipeline; imports sub-workflows from subworkflow/<sub>.nf
+* `subworkflow/<sub>.nf` - a self-contained processing chain that is part of the larger workflow (e.g. read alignment and dedup in a WGS calling workflow)
+* `modules/<module>.nf` - A command line tool/call that can be imported into a (sub)workflow. 
 
 ## Groovy libraries
 
