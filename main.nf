@@ -25,7 +25,7 @@ run_name = ( params.run_name == false) ? "${workflow.sessionId}" : "${params.run
 WorkflowMain.initialise(workflow, params, log)
 WorkflowPipeline.initialise( params, log)
 
-include { MAIN } from './workflows/main' params(params)
+include { MAIN } from './workflows/main
 
 multiqc_report = Channel.from([])
 
