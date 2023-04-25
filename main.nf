@@ -31,9 +31,9 @@ multiqc_report = Channel.from([])
 
 workflow {
 
-	MAIN()
+    MAIN()
 
-	 multiqc_report = multiqc_report.mix(MAIN.out.qc)
+    multiqc_report = multiqc_report.mix(MAIN.out.qc).toList()
 }
 
 workflow.onComplete {
