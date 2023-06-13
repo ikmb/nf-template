@@ -1,5 +1,7 @@
 process FASTP {
 
+    publishDir "${params.outdir}/FastP", mode: 'copy'
+    
     label 'short_parallel'
 
     container 'quay.io/biocontainers/fastp:0.23.2--h5f740d0_3'
