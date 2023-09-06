@@ -22,10 +22,10 @@ process FASTP {
 
     """
     fastp -c --in1 $r1 --in2 $r2 --out1 $r1_trim --out2 $r2_trim --detect_adapter_for_pe -w ${task.cpus} -j $json -h $html --length_required 35
-
+    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fastp \$( fastp --version | sed -e "s/fastp //g" )
+        fastp: \$(fastp --version 2>&1 | sed -e "s/fastp //g")
     END_VERSIONS
 
     """	
