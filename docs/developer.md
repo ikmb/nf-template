@@ -18,13 +18,13 @@ the `--help` command line option can be found in lib/WorkflowMain.groovy. Likewi
 
 ## Github workflows
 
-Github supports the automatic execution of specific tasks on code branches, such as the automatic building pushing of Docker containers. To add github workflows to your repository, rename the folder `dot_github` to `.github` and adjust the files therein accordingly (name of pipeline, docker repo etc).
+Github supports the automatic execution of specific tasks on code branches, such as the automatic building and pushing of Docker containers. To add github workflows to your repository, rename the folder `dot_github` to `.github` and adjust the files therein accordingly (name of pipeline, docker repo etc).
 
 ### Docker containers
 
 In order to automatically push Docker containers, you must add your docker username and API token as secrets to your repository (DOCKERHUB_USERNAME and DOCKERHUB_TOKEN). Secrets can be created under Settings/Secrets and Variables/Actions. Of course, you also need to have an account on Dockerhub and generate a permanent token.  
 
-## How to Start
+## How to start
 
 1. Create a new repository and use this template 
 
@@ -39,11 +39,29 @@ In order to automatically push Docker containers, you must add your docker usern
   - Create a dockerhub project for this pipeline
   - Update the github actions to the name of the dockerhub project 
 
+  IMPORTANT: When you rename files in a git project, use `git mv`, not plain `mv` to avoid breaking the built-in file tracking of your git repo!
+
 3. Outline your primary workflow logic in `workflow/<pipeline.nf>` 
 
-4. Start outlining your subworkflows, if any in `subworkflows/<subworkflow.nf>`
+4. Start outlining your subworkflows, if any, in `subworkflows/<subworkflow.nf>`
 
 5. Build all the necessary modules in `modules/`, using `modules/fastp/main.nf` as a template
    - Use a subfolder for each software package and folders therein for sub-functions of a given tool (e.g. samtools)
    - Each module should include a `container` statement to specify which software container is to be used
-   - Each module should collect information on the software version(s) of the tools used
+   - Each module should collect information on the software version(s) of the tools used - see existing modules for examples. 
+
+## How to test
+
+It is very much recommended to implement a simple test suite for your pipeline. 
+
+A default test profile is already included with this code base - you simply have to update the inputs. These inputs should consist of a highly reduced data set that 
+can be processes in a very short amount of time. An example would be short read data from a small section of the genome only (which you could, for example, extract from a BAM file using 
+coordinates). You get the idea. 
+
+To run the test, the syntax would be:
+
+```
+nextflow run my/pipeline -profile standard,test
+```
+
+Here, standard refers to the default site configuration ('standard') - change it if you need to run this pipeline under a different profile. 

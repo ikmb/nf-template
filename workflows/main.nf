@@ -16,6 +16,8 @@ workflow MAIN {
     samplesheet
 	
     main:
+
+    // DEV: Make sure this module is compatible with the samplesheet format you create
     INPUT_CHECK(samplesheet)
 	
     FASTP(
@@ -40,6 +42,6 @@ workflow MAIN {
     )
 
     emit:
-    qc = MULTIQC.out.report
+    qc = MULTIQC.out.html
 	
 }

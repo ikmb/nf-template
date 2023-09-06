@@ -11,6 +11,9 @@ class WorkflowMain {
     // Validate parameters and print summary to screen
     //
     public static void initialise(workflow, params, log) {
+
+        log.info header(workflow)
+
         // Print help to screen if required
         if (params.help) {
             log.info help(workflow, params, log)
@@ -18,14 +21,24 @@ class WorkflowMain {
         }
     }
 
+    // DEV: Change name of the pipeline below
+    public static String header(workflow) {
+        def headr = ''
+        def info_line = "IKMB ChangeIn_lib/WorkflowMain pipeline | version ${workflow.manifest.version}"
+        headr = """
+    ===============================================================================
+    ${info_line}
+    ===============================================================================
+    """
+        return headr
+    }
+
     public static String help(workflow, params, log) {
         def command = "nextflow run ${workflow.manifest.name} --samples Samples.csv --assembly GRCh38 --kit xGen_v2 -profile diagnostic"
         def help_string = ''
         // Help message
         help_string = """
-           ===============================================================================
-           IKMB pipeline | version ${workflow.manifest.version}
-           ===============================================================================
+
            Usage: nextflow run ikmb/pipeline -samples Samples.csv
 
            Required parameters:

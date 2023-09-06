@@ -8,12 +8,13 @@ process MULTIQC {
     path('*')
 
     output:
-    path('*.html'), emit: html
+    path('multiqc_report.html'), emit: html
     path("versions.yml"), emit: versions
 
     script:
 
     """
+    cp ${baseDir}/assets/multiqc_config.yaml . 
     multiqc . 
 
     cat <<-END_VERSIONS > versions.yml

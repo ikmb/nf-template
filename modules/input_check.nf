@@ -29,7 +29,7 @@ def create_fastq_channel(LinkedHashMap row) {
         exit 1, "ERROR: Please check input samplesheet -> Read 1 FastQ file does not exist!\n${row.R1}"
     }
     if (!file(row.R2).exists()) {
-         exit 1, "ERROR: Please check input samplesheet -> Read 2 FastQ file does not exist!\n${row.R2}"
+        exit 1, "ERROR: Please check input samplesheet -> Read 2 FastQ file does not exist!\n${row.R2}"
     }
     array = [ meta, [ file(row.R1), file(row.R2) ] ]
     return array
