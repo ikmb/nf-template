@@ -14,6 +14,7 @@ process MULTIQC {
     script:
 
     """
+    cp ${params.logo} . 
     cp ${baseDir}/assets/multiqc_config.yaml . 
     multiqc . 
 
