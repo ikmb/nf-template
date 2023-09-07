@@ -30,7 +30,21 @@ In order to automatically push Docker containers, you must add your docker usern
 
 ![](../images/github_template.png)
 
-2. Go through the source files and address the sections marked with `//DEV`
+2. Checkout the new repository
+
+After checking out the repo, create a branch "dev" or "devel" as well as "main"
+
+```
+git branch devel
+git branch main
+```
+With these branches created, switch to the devel branch and start developing.
+
+```
+git checkout devel
+```
+
+3. Go through the source files and address the sections marked with `//DEV`
 
 - Update `nextflow.config' with the name and version of your pipeline, required nextflow version and so on
 - Rename the main workflow file and workflow definition to match your pipeline topic (and update main.nf accordingly)
@@ -41,11 +55,11 @@ In order to automatically push Docker containers, you must add your docker usern
 
   IMPORTANT: When you rename files in a git project, use `git mv`, not plain `mv` to avoid breaking the built-in file tracking of your git repo!
 
-3. Outline your primary workflow logic in `workflow/<pipeline.nf>` 
+4. Outline your primary workflow logic in `workflow/<pipeline.nf>` 
 
-4. Start outlining your subworkflows, if any, in `subworkflows/<subworkflow.nf>`
+5. Start outlining your subworkflows, if any, in `subworkflows/<subworkflow.nf>`
 
-5. Build all the necessary modules in `modules/`, using `modules/fastp/main.nf` as a template
+6. Build all the necessary modules in `modules/`, using `modules/fastp/main.nf` as a template
    - Use a subfolder for each software package and folders therein for sub-functions of a given tool (e.g. samtools)
    - Each module should include a `container` statement to specify which software container is to be used
    - Each module should collect information on the software version(s) of the tools used - see existing modules for examples. 
@@ -56,7 +70,7 @@ It is very much recommended to implement a simple test suite for your pipeline.
 
 A default test profile is already included with this code base - you simply have to update the inputs. These inputs should consist of a highly reduced data set that 
 can be processes in a very short amount of time. An example would be short read data from a small section of the genome only (which you could, for example, extract from a BAM file using 
-coordinates). You get the idea. 
+coordinates). You get the idea. We try to keep test data in a [shared repository](https://github.com/ikmb/nf-testdata) - you might find something you can use in there, or you could add your own data set. Remember, git has a hard-limit of 50MB for individual files. 
 
 To run the test, the syntax would be:
 
