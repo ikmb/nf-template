@@ -24,7 +24,7 @@ class WorkflowMain {
     // DEV: Change name of the pipeline below
     public static String header(workflow) {
         def headr = ''
-        def info_line = "IKMB ChangeIn_lib/WorkflowMain pipeline | version ${workflow.manifest.version}"
+        def info_line = "IKMB ${workflow.manifest.description} | version ${workflow.manifest.version}"
         headr = """
     ===============================================================================
     ${info_line}
